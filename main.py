@@ -40,11 +40,11 @@ def predict_value(data: CustomerMetrics):
         "is_high_value": bool(prediction),
         "confidence": round(probability, 4)
     }
-
-import os
 import uvicorn
-
+import os
 if __name__ == "__main__":
-    # Use the PORT environment variable if it exists (for Render), otherwise default to 8000 (local)
-    port = int(os.environ.get("PORT", 8000))
+    # Render provides the PORT, we must use it.
+    port = int(os.environ.get("PORT", 10000)) 
+    # Must use 0.0.0.0 to be visible outside the container
     uvicorn.run(app, host="0.0.0.0", port=port)
+    
